@@ -53,16 +53,14 @@ body {
 
 #log_div {
     background-color: gray;
-/*    margin-left: 25%;*/
+    margin-left: 50%;
     opacity: 0.75;
     color: black !important;
+    float: right;
     position: fixed;
-    left: 48%;
-    width: 50%;
     border-radius: 5px;
     z-index: 998;
     max-height: 720px;
-    max-width: 1280px;
     overflow: auto;
     font-size: 12;
 }
