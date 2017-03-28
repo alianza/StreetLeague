@@ -451,6 +451,6 @@ console.log(device_type);
 
 content_page = document.getElementById('main_content');
 
-//logger = document.getElementById('log_div');
+logger = document.getElementById('log_div');
 
 })
