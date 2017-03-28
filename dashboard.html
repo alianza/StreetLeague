@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>Street League</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1">
+    <!--        Css stylesheet link-->
+    <link rel="stylesheet" type="text/css" href=".//css/style.css">
+    <!--        <link rel="stylesheet" href="http://streetleague.wpengine.netdna-cdn.com/wp-content/themes/sls_2015/style.css">-->
+    <!--        Jquery script load-->
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <!--        local JS load-->
+    <script src=".//js/ajax.js"></script>
+    <script src=".//js/functions.js"></script>
+    <script src=".//lib/iscroll.js"></script>
+</head>
+
+<body>
+
+    <div id="application">
+
+        <div id="splash">
+
+<!--            <img id="splash_image" src="img/splashes/splash1.jpg">-->
+
+        </div>
+
+            <div id="log_div">
+
+            </div>
+
+        <div id="menu_bar" class="menu_side">
+
+            <a class="close_btn move" onclick="closeNav()">&times;</a>
+            <a onclick="homepage()"><img class="menu_logo" src=".//img/2016_sls.png"></a>
+            <a id="standings" class="move" onclick="getStandings('http://www.streetleague.com/standings/');">Current Standings</a>
+            <a id="news" class="move" onclick="getNews('http://www.streetleague.com/all-news/');">News</a>
+            <a id="pros" class="move" onclick="getPros('http://www.streetleague.com/pros/');">Pro's</a>
+            <a id="video" class="move" onclick="showVideo();">Latest Video</a>
+            <a id="about" class="move" onclick="aboutPage();">About</a>
+
+        </div>
+
+        <div id="main_content" class="active_nav_area">
+
+            <img class="menu_icon active" onclick="openNav()" src="img/menu.svg">
+
+            <div id="page_content">
+
+<!--                Page content goes here-->
+
+            </div>
+
+        </div>
+
+    </div>
+
+<!--    <script src="js/after.js"></script>-->
+
+</body>
+
+</html>
