@@ -58,14 +58,6 @@ function focusNext() {
 
 //        console.log(element.next().attr('id'));
 
-//        if (current_view === "current_standings") {
-//            $('tr:last')[0].scrollIntoView(false);
-//        } else if (current_view === "news") {
-//            $('.two-third-block:last')[0].scrollIntoView(false);
-//        } else if (current_view === "pros") {
-//            $('.item:last')[0].scrollIntoView(false);
-//        }
-
     } else if (current_view === "news" && $('.active_nav_area').attr("id") == "main_content") {
         $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
@@ -134,7 +126,7 @@ function scrollUp () {
         content_page.scrollTop = scrollHeight - now;
     }, complete: function () {
         scrollHeight = scrollHeight - 100;
-        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
+//        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
         busy = false;
     }
 });
@@ -152,7 +144,7 @@ function scrollDown () {
         content_page.scrollTop = scrollHeight + now;
     }, complete: function () {
         scrollHeight = scrollHeight + 100;
-        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
+//        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
         busy = false;
     }
 });
