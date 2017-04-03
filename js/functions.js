@@ -5,7 +5,7 @@ var current_view;
 var scrollHeight = 0;
 var busy = false;
 var player;
-var type_view = "wide";
+var view_type = "wide";
 
 //check user agent
 
@@ -113,19 +113,32 @@ function keyEnter() {
     if ($("#" + current_view)) {
         $("#" + current_view).addClass("focus_highlight");
     }
+
+    if (current_view == "news" && $('.active_nav_area').attr('id') !== "menu_bar") {
+
+        var title = element.children().children().children().children('h2').children().text();
+        var url = element.children().children().children().children().children().children().attr('href');
+
+        console.log(title + " " + url);
+
+        article(title, url);
+
+//        console.log(element.children().children().children().children().children().children().children().click());
+
+        }
 }
 
 //Scroll Up function
 function scrollUp () {
     if (scrollHeight >= 0 && !busy) {
         busy = true;
-        $({ n: 0 }).animate({ n: 100}, {
+        $({ n: 0 }).animate({ n: 150}, {
     duration: 250,
     step: function(now, fx) {
 //        console.log(now);
         content_page.scrollTop = scrollHeight - now;
     }, complete: function () {
-        scrollHeight = scrollHeight - 100;
+        scrollHeight = scrollHeight - 150;
 //        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
         busy = false;
     }
@@ -137,13 +150,13 @@ function scrollUp () {
 function scrollDown () {
     if (scrollHeight + 720 <= content_page.scrollHeight && !busy) {
         busy = true;
-         $({ n: 0 }).animate({ n: 100}, {
+         $({ n: 0 }).animate({ n: 150}, {
     duration: 250,
     step: function(now, fx) {
 //        console.log(now);
         content_page.scrollTop = scrollHeight + now;
     }, complete: function () {
-        scrollHeight = scrollHeight + 100;
+        scrollHeight = scrollHeight + 150;
 //        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
         busy = false;
     }
@@ -155,7 +168,7 @@ function scrollDown () {
 function openNav() {
     $(".active").removeClass("active");
     document.getElementById("menu_bar").style.width = "250px";
-    if (type_view === "narrow") {
+    if (view_type === "narrow") {
         document.getElementById("page_content").style.paddingLeft = "0px";
 }
     document.getElementById("page_content").style.marginLeft = "250px";
@@ -171,7 +184,7 @@ function openNav() {
 function closeNav() {
     $(".active").removeClass("active");
     document.getElementById("menu_bar").style.width = "0px";
-    if (type_view === "narrow") {
+    if (view_type === "narrow") {
         document.getElementById("page_content").style.paddingLeft = "70px";
     }
     document.getElementById("page_content").style.marginLeft = "0px";
@@ -209,7 +222,7 @@ $(document).keydown(function(e){
             console.log(e.keyCode + " = key_-");
         } else {
             console.log("Unknown key: " + e.keyCode);
-            document.getElementById('page_content').innerHTML = wrapContent("Unknown key: " + e.keyCode);
+//            document.getElementById('page_content').innerHTML = wrapContent("Unknown key: " + e.keyCode);
         }
     logger.scrollTop = logger.scrollHeight;
     }
@@ -223,7 +236,7 @@ function homepage() {
     document.getElementById("page_content").style.paddingLeft = "0px";
     //    set current view
     current_view = "homepage";
-    type_view = "wide";
+    view_type = "wide";
     console.log('current view: ' + current_view);
 
     var x = Math.floor((Math.random() * 3) + 1);
@@ -241,7 +254,7 @@ function getStandings(your_url) {
 
 //    set current view
     current_view = "standings";
-    type_view = "narrow";
+    view_type = "narrow";
     console.log('current view: ' + current_view);
 
 //  fetch data
@@ -274,7 +287,7 @@ function getNews(your_url) {
 
 //    set current view
     current_view = "news";
-    type_view = "narrow";
+    view_type = "narrow";
     console.log('current view: ' + current_view);
 
 //  fetch data
@@ -308,7 +321,7 @@ function getPros(your_url) {
 
 //    set current view
     current_view = "pros";
-    type_view = "narrow";
+    view_type = "narrow";
     console.log('current view: ' + current_view);
 
 //  fetch data
@@ -340,7 +353,7 @@ function showVideo() {
     document.getElementById("page_content").style.paddingLeft = "0px";
 //    set current view
     current_view = "video";
-    type_view = "wide";
+    view_type = "wide";
     console.log('current view: ' + current_view);
 
 //    start the loader
@@ -392,7 +405,7 @@ function aboutPage() {
 //    set current view
 
     current_view = "about";
-    type_view = "narrow";
+    view_type = "narrow";
     console.log('current view: ' + current_view);
 
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
@@ -406,6 +419,42 @@ function aboutPage() {
     text = wrapContent(text);
 
     document.getElementById('page_content').innerHTML = text;
+
+}
+
+function article (title, your_url) {
+
+
+//    Start the loader
+    document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
+
+//    set current view
+    current_view = "article";
+    view_type = "narrow";
+    console.log('current view: ' + current_view);
+
+//  fetch data
+    $.ajax({
+        url: your_url,
+        type: 'GET',
+        success: function(res) {
+            var text = res.responseText;
+            // then you can manipulate your text as you wish
+
+            text = $(text);//this turns your string into real html
+            text = text.find('.excerpt').eq(0).html();
+
+//            text = $(text);
+//            text = text.find('.alignnone').attr('sizes') = " ";
+
+            text = '<h2 class="current_header">' + title + '</h2><div class="solid_bar"></div>' + text;
+            text = wrapContent(text);
+            document.getElementById('page_content').innerHTML = text;
+//            window.stop();
+
+        }
+
+    });
 
 }
 
