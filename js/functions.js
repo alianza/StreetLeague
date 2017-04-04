@@ -55,9 +55,7 @@ function focusNext() {
     if (element.next().length && $('.active_nav_area').attr("id") == "menu_bar") {
         element.next().addClass("active");
         element.removeClass("active");
-
 //        console.log(element.next().attr('id'));
-
     } else if (current_view === "news" && $('.active_nav_area').attr("id") == "main_content") {
         $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
@@ -113,18 +111,12 @@ function keyEnter() {
     if ($("#" + current_view)) {
         $("#" + current_view).addClass("focus_highlight");
     }
-
     if (current_view == "news" && $('.active_nav_area').attr('id') !== "menu_bar") {
-
         var title = element.children().children().children().children('h2').children().text();
         var url = element.children().children().children().children().children().children().attr('href');
-
         console.log(title + " " + url);
-
         article(title, url);
-
 //        console.log(element.children().children().children().children().children().children().children().click());
-
         }
 }
 
@@ -228,8 +220,8 @@ $(document).keydown(function(e){
     }
 );
 
+//Homepage Function
 function homepage() {
-
     //    start the loader and adjust container
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
     //    set appropriate page width
@@ -238,25 +230,17 @@ function homepage() {
     current_view = "homepage";
     view_type = "wide";
     console.log('current view: ' + current_view);
-
     var x = Math.floor((Math.random() * 3) + 1);
-
     document.getElementById('page_content').innerHTML = '<a href="#" onclick=""><img class="advert" src=".//img/ads/ad' + x + '.gif"></a>';
-
 }
-
 //Get curent standings page
-
 function getStandings(your_url) {
-
 //    Start the loader and adjust container
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
-
 //    set current view
     current_view = "standings";
     view_type = "narrow";
     console.log('current view: ' + current_view);
-
 //  fetch data
     $.ajax({
     url: your_url,
@@ -264,32 +248,23 @@ function getStandings(your_url) {
     success: function(res) {
         var text = res.responseText;
         // then you can manipulate your text as you wish
-
         text = $(text);//this turns your string into real html
-
         text = text.find('#white-background').eq(0).html();
         text = wrapContent(text);
         document.getElementById('page_content').innerHTML = text;
 //        window.stop();
-
         }
-
     });
-
 }
 
 //Get News page
-
 function getNews(your_url) {
-
 //    Start the loader
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
-
 //    set current view
     current_view = "news";
     view_type = "narrow";
     console.log('current view: ' + current_view);
-
 //  fetch data
     $.ajax({
         url: your_url,
@@ -297,33 +272,24 @@ function getNews(your_url) {
         success: function(res) {
             var text = res.responseText;
             // then you can manipulate your text as you wish
-
             text = $(text);//this turns your string into real html
-
             text = text.find('#home-blog-items').eq(0).html();
             text = "<div id='white-background'><h2 class='current_header'>Latest News</h2><div class='solid_bar'></div>" + text + "</div>";
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
 //            window.stop();
-
         }
-
     });
-
 }
 
 //Get Pro's page
-
 function getPros(your_url) {
-
 //    Start the loader
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
-
 //    set current view
     current_view = "pros";
     view_type = "narrow";
     console.log('current view: ' + current_view);
-
 //  fetch data
     $.ajax({
         url: your_url,
@@ -331,36 +297,26 @@ function getPros(your_url) {
         success: function(res) {
             var text = res.responseText;
             // then you can manipulate your text as you wish
-
             text = $(text);//this turns your string into real html
-
             text = text.find('#white-background').eq(0).html();
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
 //            window.stop();
-
         }
-
     });
-
 }
 
 //Get latest video
-
 function showVideo() {
-
 //    set appropriate page width
     document.getElementById("page_content").style.paddingLeft = "0px";
 //    set current view
     current_view = "video";
     view_type = "wide";
     console.log('current view: ' + current_view);
-
 //    start the loader
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
-
-
-    //Load youtube Iframe API if it has not been yet
+    //Load youtube Iframe API if it has not yet
     if ($("#youtube_API").length == 0) {
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -370,12 +326,11 @@ function showVideo() {
     } else {
         onYouTubeIframeAPIReady();
     }
-
 //    document.getElementById('page_content').innerHTML = '<iframe id="ytplayer" type="text/html" width="720" height="405" src="https://www.youtube.com/embed/?listType=user_uploads&list=streetleague&autoplay=1&modestbranding=1&showinfo=0" frameborder="0" allowfullscreen>';
 }
 
-//    Youtube API attempt
-  function onYouTubeIframeAPIReady() {
+//    Youtube new Player
+function onYouTubeIframeAPIReady() {
       document.getElementById('page_content').innerHTML = "<div id='player'></div>";
     player = new YT.Player('player', {
         playerVars: {
@@ -399,40 +354,30 @@ function loadVideo() {
 }
 
 //Show About page
-
 function aboutPage() {
-
 //    set current view
-
     current_view = "about";
     view_type = "narrow";
     console.log('current view: ' + current_view);
-
+//  Set the loader
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
-
+//  Add text
     text = "<h2 class='page-title-heading'>About</h2>";
-
     text += "<div class='solid_bar'></div>";
-
     text += "<p class='about_text'>Welcome to the very unofficial Street League skateboarding Smart TV application made by Jan-Willem van Bremen</p>";
-
     text = wrapContent(text);
-
+//  Load text
     document.getElementById('page_content').innerHTML = text;
-
 }
 
+//  Open article function
 function article (title, your_url) {
-
-
 //    Start the loader
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
-
 //    set current view
     current_view = "article";
     view_type = "narrow";
     console.log('current view: ' + current_view);
-
 //  fetch data
     $.ajax({
         url: your_url,
@@ -449,23 +394,16 @@ function article (title, your_url) {
             document.getElementById('page_content').innerHTML = text;
             $('.alignnone:first').hide();
         }
-
     });
-
 }
 
 function wrapContent(text) {
-
     scrollHeight = 0;
-
     text = "<div id='content_wrapper'>" + text + "</div>";
-
     return text;
-
 }
 
 $(document).ready(function(){
-
     (function () {
     var old = console.log;
     var logger = document.getElementById('log_div');
@@ -487,7 +425,6 @@ console.log(user_agent);
 console.log(device_type);
 
 content_page = document.getElementById('main_content');
-
 logger = document.getElementById('log_div');
 
-})
+});
