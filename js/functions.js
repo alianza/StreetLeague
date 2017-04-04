@@ -452,8 +452,6 @@ function article (title, your_url) {
 
     });
 
-//Suiuiuiui
-
 }
 
 function wrapContent(text) {
