@@ -8,7 +8,6 @@ var player;
 var view_type = "wide";
 
 //check user agent
-
 if (user_agent.indexOf("windows") > 0) {
     device_type = "Windows";
     var key_up = 38;
@@ -67,7 +66,6 @@ function focusNext() {
         } else {
             $('.two-third-block:first').addClass("active");
         }
-
     } else {
         scrollDown();
     }
@@ -92,7 +90,6 @@ function focusPrev() {
             $('.menu_icon').addClass("active");
         }
         }
-
     } else {
         scrollUp();
     }
