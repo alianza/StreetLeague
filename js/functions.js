@@ -442,19 +442,17 @@ function article (title, your_url) {
             // then you can manipulate your text as you wish
 
             text = $(text);//this turns your string into real html
-            text = text.find('.excerpt').eq(0).html();
-
-//            text = $(text);
-//            text = text.find('.alignnone').attr('sizes') = " ";
+            text = text.find('.entry-content').eq(0).html();
 
             text = '<h2 class="current_header">' + title + '</h2><div class="solid_bar"></div>' + text;
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
-//            window.stop();
-
+            $('.alignnone:first').hide();
         }
 
     });
+
+
 
 }
 

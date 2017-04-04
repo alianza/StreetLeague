@@ -98,7 +98,6 @@ body {
     height: auto;
 }
 
-
 /* The side navigation menu */
 
 .menu_side {
@@ -156,7 +155,6 @@ body {
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 
 @media screen and (max-height: 450px) {
-
     .menu_side a {
         font-size: 18px;
     }
@@ -176,14 +174,14 @@ body {
 /*Current standings table style*/
 
 .current_header {
-    font-family: 'TradeGothic_2' ,'sans-serif' !important;
+    font-family: 'TradeGothic_2', 'sans-serif' !important;
     color: #757575 !important;
     text-transform: uppercase;
     font-size: 24px;
 }
 
 .current_standings {
-    font-family: 'TradeGothic_2' ,'sans-serif' !important;
+    font-family: 'TradeGothic_2', 'sans-serif' !important;
     font-size: 24px;
     width: 100%;
     color: #000;
@@ -201,7 +199,7 @@ body {
     padding-right: 70px;
 }
 
-.heading > :first-child {
+.heading >:first-child {
     text-align: left;
 }
 
@@ -218,15 +216,16 @@ body {
     border-bottom: 1px solid #d7d7d7;
 }
 
+
 /*News browse page style*/
 
 article {
     color: #959595 !important;
 }
 
-.two-third-block{
-	margin: 5px;
-	border-bottom: solid 1px #ccc;
+.two-third-block {
+    margin: 5px;
+    border-bottom: solid 1px #ccc;
     width: 100%;
     padding: 0;
     margin-right: 20px;
@@ -240,7 +239,7 @@ article {
 }
 
 h2 a {
-    font-family: 'TradeGothic_2' ,'sans-serif' !important;
+    font-family: 'TradeGothic_2', 'sans-serif' !important;
     color: #000;
     font-size: 100%;
     text-decoration: none;
@@ -259,7 +258,7 @@ h2 a {
 /*Pro's pagina style*/
 
 .page-title-heading {
-    font-family: 'TradeGothic_2' ,'sans-serif' !important;
+    font-family: 'TradeGothic_2', 'sans-serif' !important;
     margin-top: 0;
     margin-bottom: 0;
     color: #757575 !important;
@@ -306,26 +305,34 @@ ul.portfolio-items-one-fourth li {
     color: #000;
     font-size: 24px;
     text-align: left;
-    font-family: 'TradeGothic_2' ,'sans-serif' !important;
+    font-family: 'TradeGothic_2', 'sans-serif' !important;
     text-transform: uppercase;
 }
 
 /*About page style*/
 
 .about_text {
-
-    font-family: 'TradeGothic_2' ,'sans-serif' !important;
+    font-family: 'TradeGothic_2', 'sans-serif' !important;
     font-size: 18px;
-
 }
+
 #splash_image {
     position: fixed;
     width: 100%;
     z-index: 999;
-
 }
 
 #splash {
     width: inherit;
     height: inherit;
+}
+
+/*Article page style*/
+
+.alignnone {
+    width: 100%;
+}
+
+.post-social {
+    visibility: hidden;
 }
