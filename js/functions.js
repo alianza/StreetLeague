@@ -54,7 +54,6 @@ function focusNext() {
     if (element.next().length && $('.active_nav_area').attr("id") == "menu_bar") {
         element.next().addClass("active");
         element.removeClass("active");
-//        console.log(element.next().attr('id'));
     } else if (current_view === "news" && $('.active_nav_area').attr("id") == "main_content") {
         $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
@@ -78,7 +77,6 @@ function focusPrev() {
         element.prev().addClass("active");
         element.removeClass("active");
     } else if (current_view === "news" && $('.active_nav_area').attr("id") == "main_content") {
-
 //        $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
             if (element.prev(".two-third-block").length) {
@@ -88,7 +86,7 @@ function focusPrev() {
             } else {
             element.removeClass("active");
             $('.menu_icon').addClass("active");
-        }
+            }
         }
     } else {
         scrollUp();
@@ -113,7 +111,6 @@ function keyEnter() {
         var url = element.children().children().children().children().children().children().attr('href');
         console.log(title + " " + url);
         article(title, url);
-//        console.log(element.children().children().children().children().children().children().children().click());
         }
 }
 
@@ -181,6 +178,7 @@ function closeNav() {
     $(".menu_side").removeClass("active_nav_area");
 }
 
+//Keydown keycode identifier function
 $(document).keydown(function(e){
         if (e.keyCode == key_right) {
             closeNav();
@@ -230,6 +228,7 @@ function homepage() {
     var x = Math.floor((Math.random() * 3) + 1);
     document.getElementById('page_content').innerHTML = '<a href="#" onclick=""><img class="advert" src=".//img/ads/ad' + x + '.gif"></a>';
 }
+
 //Get curent standings page
 function getStandings(your_url) {
 //    Start the loader and adjust container
@@ -382,10 +381,8 @@ function article (title, your_url) {
         success: function(res) {
             var text = res.responseText;
             // then you can manipulate your text as you wish
-
             text = $(text);//this turns your string into real html
             text = text.find('.entry-content').eq(0).html();
-
             text = '<h2 class="current_header">' + title + '</h2><div class="solid_bar"></div>' + text;
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
