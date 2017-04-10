@@ -403,6 +403,7 @@ function wrapContent(text) {
 $(document).ready(function(){
 
 //Initiate the logger
+    (function () {
     var old = console.log;
     var logger = document.getElementById('log_div');
     console.log = function () {
@@ -415,6 +416,7 @@ $(document).ready(function(){
             }
         }
     }
+})();
 
 //Set and hide the splash screen
 var x = Math.floor((Math.random() * 3) + 1);
