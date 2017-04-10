@@ -34,7 +34,7 @@ body {
 
 #page_content {
     transition: margin-left .5s, padding-left .5s;
-    padding-left: 70px;
+/*    padding-left: 0px;*/
     position: relative;
     width: auto;
     height: auto;
@@ -59,7 +59,7 @@ body {
     float: right;
     position: fixed;
     border-radius: 5px;
-    z-index: 998;
+    z-index: 999;
     max-height: 720px;
     overflow: auto;
     font-size: 12;
@@ -230,6 +230,7 @@ article {
     padding: 0;
     margin-right: 20px;
     float: left;
+    list-style-type: none;
 }
 
 .entry-body h2 {
@@ -318,8 +319,9 @@ ul.portfolio-items-one-fourth li {
 
 #splash_image {
     position: fixed;
-    width: 100%;
+    width: 1280px;
     z-index: 999;
+    margin-left: -8px;
 }
 
 #splash {

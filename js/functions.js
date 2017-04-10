@@ -51,10 +51,10 @@ if (user_agent.indexOf("windows") > 0) {
 //function focus next
 function focusNext() {
     var element = $(".active");
-    if (element.next().length && $('.active_nav_area').attr("id") == "menu_bar") {
+    if (element.next().length && $('#menu_bar').hasClass('active_nav_area')) {
         element.next().addClass("active");
         element.removeClass("active");
-    } else if (current_view === "news" && $('.active_nav_area').attr("id") == "main_content") {
+    } else if (current_view === "news" && $('#main_content').hasClass('active_nav_area')) {
         $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
             if (element.next(".two-third-block").length) {
@@ -73,10 +73,10 @@ function focusNext() {
 //function focus previous
 function focusPrev() {
     var element = $(".active");
-    if (element.prev().length && $('.active_nav_area').attr('id') == "menu_bar") {
+    if (element.prev().length && $('#menu_bar').hasClass('active_nav_area')) {
         element.prev().addClass("active");
         element.removeClass("active");
-    } else if (current_view === "news" && $('.active_nav_area').attr("id") == "main_content") {
+    } else if (current_view === "news" && $('#main_content').hasClass('active_nav_area')) {
 //        $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
             if (element.prev(".two-third-block").length) {
@@ -154,9 +154,9 @@ function scrollDown () {
 function openNav() {
     $(".active").removeClass("active");
     document.getElementById("menu_bar").style.width = "250px";
-    if (view_type === "narrow") {
+    if (view_type == "narrow") {
         document.getElementById("page_content").style.paddingLeft = "0px";
-}
+    }
     document.getElementById("page_content").style.marginLeft = "250px";
     if ($(".focus_highlight").length) {
         $(".focus_highlight").addClass("active");
@@ -170,8 +170,10 @@ function openNav() {
 function closeNav() {
     $(".active").removeClass("active");
     document.getElementById("menu_bar").style.width = "0px";
-    if (view_type === "narrow") {
+    if (view_type == "narrow") {
         document.getElementById("page_content").style.paddingLeft = "70px";
+    } else {
+        document.getElementById("page_content").style.paddingLeft = "0px";
     }
     document.getElementById("page_content").style.marginLeft = "0px";
     $(".menu_icon").addClass("active");
@@ -220,7 +222,7 @@ function homepage() {
     //    start the loader and adjust container
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
     //    set appropriate page width
-    document.getElementById("page_content").style.paddingLeft = "0px";
+//    document.getElementById("page_content").style.paddingLeft = "0px";
     //    set current view
     current_view = "homepage";
     view_type = "wide";
@@ -346,7 +348,7 @@ function onYouTubeIframeAPIReady() {
 function loadVideo() {
     player.loadPlaylist({listType:"user_uploads",
                     list:"streetleague",
-})
+});
 }
 
 //Show About page
@@ -370,6 +372,7 @@ function aboutPage() {
 function article (title, your_url) {
 //    Start the loader
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
+    $('.menu_icon').addClass('active');
 //    set current view
     current_view = "article";
     view_type = "narrow";
@@ -398,7 +401,8 @@ function wrapContent(text) {
 }
 
 $(document).ready(function(){
-    (function () {
+
+//Initiate the logger
     var old = console.log;
     var logger = document.getElementById('log_div');
     console.log = function () {
@@ -411,13 +415,20 @@ $(document).ready(function(){
             }
         }
     }
-})();
 
+//Set and hide the splash screen
+var x = Math.floor((Math.random() * 3) + 1);
+$('#splash_image').attr('src', ".//img/splashes/splash" + x +".png");
+setTimeout(function(){$('#splash_image').fadeOut(1000);}, 2500);
+
+//Display the homepage
 homepage();
 
+//Log some userful device info
 console.log(user_agent);
 console.log(device_type);
 
+//Identify some elements for scrolling purposes
 content_page = document.getElementById('main_content');
 logger = document.getElementById('log_div');
 
