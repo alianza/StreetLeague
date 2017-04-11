@@ -182,7 +182,7 @@ body {
 
 .current_standings {
     font-family: 'TradeGothic_2', 'sans-serif' !important;
-    font-size: 24px;
+    font-size: 28px;
     width: 100%;
     color: #000;
 }
@@ -254,6 +254,10 @@ h2 a {
     width: 280px;
     float: left;
     margin-right: 15px;
+}
+
+.excerpt {
+    font-size: 24px;
 }
 
 /*Pro's pagina style*/
