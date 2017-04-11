@@ -54,7 +54,7 @@ function focusNext() {
     if (element.next().length && $('#menu_bar').hasClass('active_nav_area')) {
         element.next().addClass("active");
         element.removeClass("active");
-    } else if (current_view === "news" && $('#main_content').hasClass('active_nav_area')) {
+    } else if (current_view === "news" && $('#page_content').hasClass('active_nav_area')) {
         $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
             if (element.next(".two-third-block").length) {
@@ -76,7 +76,7 @@ function focusPrev() {
     if (element.prev().length && $('#menu_bar').hasClass('active_nav_area')) {
         element.prev().addClass("active");
         element.removeClass("active");
-    } else if (current_view === "news" && $('#main_content').hasClass('active_nav_area')) {
+    } else if (current_view === "news" && $('#page_content').hasClass('active_nav_area')) {
 //        $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
             if (element.prev(".two-third-block").length) {
@@ -106,7 +106,7 @@ function keyEnter() {
     if ($("#" + current_view)) {
         $("#" + current_view).addClass("focus_highlight");
     }
-    if (current_view == "news" && $('.active_nav_area').attr('id') !== "menu_bar") {
+    if (current_view == "news" && $('#page_content').hasClass('active_nav_area')) {
         var title = element.children().children().children().children('h2').children().text();
         var url = element.children().children().children().children().children().children().attr('href');
         console.log(title + " " + url);
@@ -163,7 +163,8 @@ function openNav() {
     } else {
         $(".menu_side").children(".close_btn").addClass("active");
     }
-    $(".menu_side").addClass("active_nav_area");
+    $("#menu_bar").addClass("active_nav_area");
+    $("#page_content").removeClass("active_nav_area");
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
@@ -171,13 +172,14 @@ function closeNav() {
     $(".active").removeClass("active");
     document.getElementById("menu_bar").style.width = "0px";
     if (view_type == "narrow") {
-        document.getElementById("page_content").style.paddingLeft = "70px";
+        document.getElementById("page_content").style.paddingLeft = "65px";
     } else {
         document.getElementById("page_content").style.paddingLeft = "0px";
     }
     document.getElementById("page_content").style.marginLeft = "0px";
     $(".menu_icon").addClass("active");
-    $(".menu_side").removeClass("active_nav_area");
+    $("#menu_bar").removeClass("active_nav_area");
+    $("#page_content").addClass("active_nav_area");
 }
 
 //Keydown keycode identifier function
@@ -219,11 +221,9 @@ $(document).keydown(function(e){
 
 //Homepage Function
 function homepage() {
-    //    start the loader and adjust container
+//    start the loader and adjust container
     document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
-    //    set appropriate page width
-//    document.getElementById("page_content").style.paddingLeft = "0px";
-    //    set current view
+//    set current view
     current_view = "homepage";
     view_type = "wide";
     console.log('current view: ' + current_view);
@@ -324,7 +324,6 @@ function showVideo() {
     } else {
         onYouTubeIframeAPIReady();
     }
-//    document.getElementById('page_content').innerHTML = '<iframe id="ytplayer" type="text/html" width="720" height="405" src="https://www.youtube.com/embed/?listType=user_uploads&list=streetleague&autoplay=1&modestbranding=1&showinfo=0" frameborder="0" allowfullscreen>';
 }
 
 //    Youtube new Player
@@ -412,7 +411,7 @@ $(document).ready(function(){
                 logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]);
             }
             else {
-                logger.innerHTML += "<p style='line-height: normal;' class='single_log'>" + arguments[i] + "</p>";
+                logger.innerHTML += "<p class='single_log'>" + arguments[i] + "</p>";
             }
         }
     }
