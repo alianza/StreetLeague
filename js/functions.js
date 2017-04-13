@@ -5,7 +5,7 @@ var current_view;
 var scrollHeight = 0;
 var busy = false;
 var player;
-var view_type = "wide";
+var view_type;
 
 //check user agent
 if (user_agent.indexOf("windows") > 0) {
@@ -19,6 +19,10 @@ if (user_agent.indexOf("windows") > 0) {
     var key_3 = 51;
     var key_equals = 187;
     var key_minus = 189;
+    var key_prev = 188;
+    var key_next = 190;
+    var key_pause = 32;
+    var key_play = 75;
 } else if (user_agent.indexOf("webos") > 0) {
     device_type = "WebOS";
     var key_up = 38;
@@ -28,6 +32,10 @@ if (user_agent.indexOf("windows") > 0) {
     var key_enter = 13;
     var key_2 = 50;
     var key_3 = 51;
+    var key_prev = 412;
+    var key_next = 417;
+    var key_pause = 19;
+    var key_play = 415;
 } else if (user_agent.indexOf("smarthub") > 0) {
     device_type = "Samsung";
     var key_up = 29460;
@@ -211,9 +219,20 @@ $(document).keydown(function(e){
         } else if (e.keyCode == key_minus) {
             scrollUp();
             console.log(e.keyCode + " = key_-");
+        } else if (e.keyCode == key_next) {
+            nextVideo();
+            console.log(e.keyCode + " = key_next");
+        } else if (e.keyCode == key_prev) {
+            prevVideo();
+            console.log(e.keyCode + " = key_prev");
+        } else if (e.keyCode == key_pause) {
+            pauseVideo();
+            console.log(e.keyCode + " = key_pause");
+        } else if (e.keyCode == key_play) {
+            playVideo();
+            console.log(e.keyCode + " = key_play");
         } else {
             console.log("Unknown key: " + e.keyCode);
-//            document.getElementById('page_content').innerHTML = wrapContent("Unknown key: " + e.keyCode);
         }
     logger.scrollTop = logger.scrollHeight;
     }
@@ -348,6 +367,31 @@ function loadVideo() {
     player.loadPlaylist({listType:"user_uploads",
                     list:"streetleague",
 });
+    $('.menu_icon').fadeTo(1000, 0.5);
+}
+
+function nextVideo() {
+    if (current_view == 'video') {
+    player.nextVideo();
+    }
+}
+
+function prevVideo() {
+    if (current_view == 'video') {
+    player.previousVideo();
+    }
+}
+
+function pauseVideo() {
+    if (current_view == 'video') {
+    player.pauseVideo();
+    }
+}
+
+function playVideo() {
+    if (current_view == 'video') {
+    player.playVideo();
+    }
 }
 
 //Show About page
@@ -396,6 +440,7 @@ function article (title, your_url) {
 function wrapContent(text) {
     scrollHeight = 0;
     text = "<div id='content_wrapper'>" + text + "</div>";
+    $('.menu_icon').fadeTo(1000, 1)
     return text;
 }
 
