@@ -351,7 +351,7 @@ strong {
     font-family: 'TradeGothic_2', 'sans-serif' !important;
 }
 
-p {
+#content_wrapper p {
     font-size: 20px;
 }
 .permalink {
@@ -363,3 +363,27 @@ a {
     color: black;
     text-decoration: none;
 }
+
+/*Video page style*/
+#controls_div {
+    position: fixed;
+    z-index: 3;
+    left: 30%;
+    top: 30%;
+    opacity: 0.9;
+    font-family: 'TradeGothic_2', 'sans-serif' !important;
+    background-color: white;
+    border-radius: 25px;
+    font-size: 30px !important;
+}
+
+.controls {
+    margin: auto;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/*
+.message_text {
+    font-size:
+}*/
