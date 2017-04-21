@@ -327,12 +327,12 @@ function getPros(your_url) {
 function showVideo() {
 //    set appropriate page width
     document.getElementById("page_content").style.paddingLeft = "0px";
+//    start the loader
+    document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
 //    set current view
     current_view = "video";
     view_type = "wide";
     console.log('current view: ' + current_view);
-//    start the loader
-    document.getElementById('page_content').innerHTML = "<img class='loader' src='img/loader.gif'>";
     //Load youtube Iframe API if it has not yet
     if ($("#youtube_API").length == 0) {
         var tag = document.createElement('script');
@@ -347,7 +347,8 @@ function showVideo() {
 
 //    Youtube new Player
 function onYouTubeIframeAPIReady() {
-      document.getElementById('page_content').innerHTML = "<div id='player'></div>";
+    document.getElementById('page_content').innerHTML = "<div id='player'></div>";
+    document.getElementById('splash').innerHTML = "<div id='controls_div'><p class='message_text'>Use the media keys on your remote to control the player!</p><img class='controls' src='img/controls.png'></div>";
     player = new YT.Player('player', {
         playerVars: {
             modestbranding: 1,
@@ -361,6 +362,7 @@ function onYouTubeIframeAPIReady() {
         'onReady': loadVideo
       }
     });
+    setTimeout(function(){$('#controls_div').fadeOut(1000);}, 5000);
   }
 
 function loadVideo() {
@@ -446,7 +448,7 @@ function wrapContent(text) {
 
 $(document).ready(function(){
 
-//Initiate the logger
+//Initiate the logger to catch all console.log() calls
     (function () {
     var old = console.log;
     var logger = document.getElementById('log_div');
