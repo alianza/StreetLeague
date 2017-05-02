@@ -333,7 +333,7 @@ function showVideo() {
     current_view = "video";
     view_type = "wide";
     console.log('current view: ' + current_view);
-    //Load youtube Iframe API if it has not yet
+    //Load youtube Iframe API if it has not been yet
     if ($("#youtube_API").length == 0) {
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -348,7 +348,6 @@ function showVideo() {
 //    Youtube new Player
 function onYouTubeIframeAPIReady() {
     document.getElementById('page_content').innerHTML = "<div id='player'></div>";
-    document.getElementById('splash').innerHTML = "<div id='controls_div'><p class='message_text'>Use the media keys on your remote to control the player!</p><img class='controls' src='img/controls.png'></div>";
     player = new YT.Player('player', {
         playerVars: {
             modestbranding: 1,
@@ -362,14 +361,16 @@ function onYouTubeIframeAPIReady() {
         'onReady': loadVideo
       }
     });
-    setTimeout(function(){$('#controls_div').fadeOut(1000);}, 5000);
   }
 
 function loadVideo() {
-    player.loadPlaylist({listType:"user_uploads",
-                    list:"streetleague",
-});
+    player.loadPlaylist({listType:"user_uploads",list:"streetleague",});
     $('.menu_icon').fadeTo(1000, 0.5);
+    $('#page_content').append("<div class='v-align-helper'></div><div class='v-align-target'><div id='controls_div'><p class='message_text'>Use the media keys on your remote to control the player!</p><img class='controls' src='img/controls.png'></div></div>");
+    $('#page_content').addClass('text_align');
+    $('#controls_div').fadeTo(1000,0.9);
+    setTimeout(function(){$('#controls_div').fadeOut(1000, function() {$('#page_content').removeClass('text_align');});}, 3500);
+    setTimeout(function(){if($('#page_content').hasClass('text_align')) {$('#page_content').removeClass('text_align');}}, 4500);
 }
 
 function nextVideo() {
@@ -442,7 +443,10 @@ function article (title, your_url) {
 function wrapContent(text) {
     scrollHeight = 0;
     text = "<div id='content_wrapper'>" + text + "</div>";
-    $('.menu_icon').fadeTo(1000, 1)
+    $('.menu_icon').fadeTo(1000, 1);
+    if($('#page_content').hasClass('text_align')) {
+        $('#page_content').removeClass('text_align');
+    }
     return text;
 }
 
