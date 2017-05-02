@@ -8,20 +8,19 @@
     src: url('.//fonts/268FD8_0_0.woff') format('woff');
 }
 
-body {
+html, body {
     font-family: Arial, sans-serif !important;
     width: 1280px !important;
     height: 720px !important;
     overflow: hidden;
     background-color: white;
+    margin: 0 !important;
 }
 
 #main_content {
     width: 1280px !important;
     height: 720px !important;
-    margin-top: -8px;
-    margin-left: -8px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -44,6 +43,19 @@ body {
     display: block;
     margin-top: 150px;
     background-color: inherit;
+}
+
+
+#splash_image {
+    position: fixed;
+    width: 1280px;
+    z-index: 999;
+}
+
+#splash {
+    width: 1280px;
+    height: 720px;
+    display: inline;
 }
 
 #log_div {
@@ -136,9 +148,8 @@ body {
 
 /* When you mouse over the navigation links, change their color */
 
-.menu_side a:hover,
-.offcanvas a:focus {
-    color: #f1f1f1;
+.menu_side a:hover {
+    color: #818181;
 }
 
 
@@ -323,19 +334,6 @@ ul.portfolio-items-one-fourth li {
     font-size: 18px;
 }
 
-#splash_image {
-    position: fixed;
-    width: 1280px;
-    z-index: 999;
-    margin-left: -8px;
-}
-
-#splash {
-    width: 1280px;
-    height: 720px;
-    display: inline;
-}
-
 /*Article page style*/
 
 .alignnone {
@@ -348,17 +346,19 @@ ul.portfolio-items-one-fourth li {
 
 strong {
     font-weight: bold;
-    font-size: 24px;
-/*    text-transform: uppercase;*/
+    font-size: 28px;
+    text-transform: uppercase;
     font-family: 'TradeGothic_2', 'sans-serif' !important;
 }
 
 #content_wrapper p {
-    font-size: 20px;
+    font-size: 24px;
 }
+
 .permalink {
     font-size: 34px;
     margin: 0px;
+    margin-bottom: -25px;
 }
 
 a {
@@ -380,6 +380,7 @@ a {
     padding-bottom: 5px;
     margin-top: -70%;
 /*    margin-left: 15%;*/
+    overflow: hidden;
 }
 
 .controls {

@@ -36,8 +36,8 @@ if (user_agent.indexOf("windows") > 0) {
     var key_next = 417;
     var key_pause = 19;
     var key_play = 415;
-} else if (user_agent.indexOf("smarthub") > 0) {
-    device_type = "Samsung";
+} else if (user_agent.indexOf("maple") > 0) {
+    device_type = "Samsung Orsay";
     var key_up = 29460;
     var key_down = 29461;
     var key_left = 4;
@@ -45,6 +45,10 @@ if (user_agent.indexOf("windows") > 0) {
     var key_enter = 29443;
     var key_2 = 98;
     var key_3 = 6;
+    var key_prev = 69;
+    var key_next = 72;
+    var key_pause = 74;
+    var key_play = 71;
 } else if (user_agent.indexOf("viera") > 0) {
     device_type = "Panasonic";
     var key_up = 38;
@@ -54,14 +58,60 @@ if (user_agent.indexOf("windows") > 0) {
     var key_enter = 13;
     var key_2 = 50;
     var key_3 = 51;
+    var key_prev = 412;
+    var key_next = 417;
+    var key_pause = 19;
+    var key_play = 415;
+} else if (user_agent.indexOf("sony") > 0) {
+    device_type = "Sony";
+    var key_up = 38;
+    var key_down = 40;
+    var key_left = 37;
+    var key_right = 39;
+    var key_enter = 13;
+    var key_2 = 50;
+    var key_3 = 51;
+    var key_prev = 412;
+    var key_next = 417;
+    var key_pause = 19;
+    var key_play = 415;
+} else if (user_agent.indexOf("philips") > 0) {
+    device_type = "Philips";
+    var key_up = 38;
+    var key_down = 40;
+    var key_left = 37;
+    var key_right = 39;
+    var key_enter = 13;
+    var key_2 = 50;
+    var key_3 = 51;
+    var key_prev = 412;
+    var key_next = 417;
+    var key_pause = 19;
+    var key_play = 415;
+} else if (user_agent.indexOf("tizen") > 0) {
+    device_type = "Samsung Tizen";
+    var key_up = 38;
+    var key_down = 40;
+    var key_left = 37;
+    var key_right = 39;
+    var key_enter = 13;
+    var key_2 = 50;
+    var key_3 = 51;
+    var key_prev = 412;
+    var key_next = 417;
+    var key_pause = 19;
+    var key_play = 415;
 }
 
 //function focus next
 function focusNext() {
+    if (document.activeElement) {
+    document.activeElement.blur();
+    }
     var element = $(".active");
     if (element.next().length && $('#menu_bar').hasClass('active_nav_area')) {
-        element.next().addClass("active");
         element.removeClass("active");
+        element.next().addClass("active");
     } else if (current_view === "news" && $('#page_content').hasClass('active_nav_area')) {
         $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
@@ -80,10 +130,13 @@ function focusNext() {
 
 //function focus previous
 function focusPrev() {
+     if (document.activeElement) {
+    document.activeElement.blur();
+     }
     var element = $(".active");
     if (element.prev().length && $('#menu_bar').hasClass('active_nav_area')) {
-        element.prev().addClass("active");
         element.removeClass("active");
+        element.prev().addClass("active");
     } else if (current_view === "news" && $('#page_content').hasClass('active_nav_area')) {
 //        $(".menu_icon").removeClass("active");
         if ($('.two-third-block').hasClass("active")) {
@@ -107,7 +160,6 @@ function keyEnter() {
     element.click();
     element.animate({borderRadius: "100px"}, 100, function() {element.animate({borderRadius: "25px"}, 100)});
     element.fadeTo( 100 , -100, function() {element.fadeTo( 50 , 1)});
-
     if ($(".focus_highlight")) {
         $(".focus_highlight").removeClass("focus_highlight");
     }
@@ -169,7 +221,7 @@ function openNav() {
     if ($(".focus_highlight").length) {
         $(".focus_highlight").addClass("active");
     } else {
-        $(".menu_side").children(".close_btn").addClass("active");
+        $(".close_btn").addClass("active");
     }
     $("#menu_bar").addClass("active_nav_area");
     $("#page_content").removeClass("active_nav_area");
@@ -205,6 +257,7 @@ $(document).keydown(function(e){
             focusPrev();
             console.log(e.keyCode + " = key_up");
         } else if (e.keyCode == key_enter) {
+            e.preventDefault();
             keyEnter();
             console.log(e.keyCode + " = key_enter");
         } else if (e.keyCode == key_3) {
@@ -247,7 +300,7 @@ function homepage() {
     view_type = "wide";
     console.log('current view: ' + current_view);
     var x = Math.floor((Math.random() * 3) + 1);
-    document.getElementById('page_content').innerHTML = '<a href="#" onclick=""><img class="advert" src=".//img/ads/ad' + x + '.gif"></a>';
+    document.getElementById('page_content').innerHTML = '<img class="advert" src=".//img/ads/ad' + x + '.gif">';
 }
 
 //Get curent standings page
@@ -354,6 +407,9 @@ function onYouTubeIframeAPIReady() {
             rel: 0,
             controls: 0,
             iv_load_policy: 3,
+            disablekb: 1,
+            showinfo: 0,
+            fs: 0,
         },
         height: '100%',
         width: '100%',
@@ -370,7 +426,18 @@ function loadVideo() {
     $('#page_content').addClass('text_align');
     $('#controls_div').fadeTo(1000,0.9);
     setTimeout(function(){$('#controls_div').fadeOut(1000, function() {$('#page_content').removeClass('text_align');});}, 3500);
-    setTimeout(function(){if($('#page_content').hasClass('text_align')) {$('#page_content').removeClass('text_align');}}, 4500);
+    setTimeout(function(){if($('#page_content').hasClass('text_align')) {$('#page_content').removeClass('text_align');}}, 5000);
+
+//    focus_timer = setInterval(function() {document.activeElement.blur(); document.body.focus();}, 1000);
+    document.body.focus();
+
+//    while (current_view == "video") {
+//        console.log("reset focus!");
+//        logger.scrollTop = logger.scrollHeight;
+//          }
+
+//    setInterval(function() {document.body.tabIndex = -1; document.body.focus(); console.log('Reset Focus!');}, 1000);
+//    setInterval(function() {console.log('Reset Focus!');}, 1000);
 }
 
 function nextVideo() {
@@ -471,7 +538,7 @@ $(document).ready(function(){
 //Set and hide the splash screen
 var x = Math.floor((Math.random() * 3) + 1);
 $('#splash_image').attr('src', ".//img/splashes/splash" + x +".png");
-setTimeout(function(){$('#splash_image').fadeOut(1000);}, 2500);
+setTimeout(function(){$('#splash_image').fadeOut(1000, function() {$('#splash').toggle();});}, 2500);
 
 //Display the homepage
 homepage();
