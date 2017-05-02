@@ -39,9 +39,10 @@ body {
 }
 
 .loader {
-    position: static;
-    margin-top: 10%;
-    margin-left: 30%;
+    margin: 0 auto;
+    width: 400px;
+    display: block;
+    margin-top: 150px;
     background-color: inherit;
 }
 
@@ -263,7 +264,7 @@ h2 a {
 
 /*Pro's pagina style*/
 
-.page-title-heading h2 {
+.page-title-heading, h2 {
     font-family: 'TradeGothic_2', 'sans-serif' !important;
     color: #757575 !important;
     text-transform: uppercase;
@@ -330,8 +331,9 @@ ul.portfolio-items-one-fourth li {
 }
 
 #splash {
-    width: inherit;
-    height: inherit;
+    width: 1280px;
+    height: 720px;
+    display: inline;
 }
 
 /*Article page style*/
@@ -341,7 +343,7 @@ ul.portfolio-items-one-fourth li {
 }
 
 .post-social {
-    visibility: hidden;
+    display: none;
 }
 
 strong {
@@ -366,24 +368,40 @@ a {
 
 /*Video page style*/
 #controls_div {
-    position: fixed;
+/*    position: fixed;*/
     z-index: 3;
-    left: 30%;
-    top: 30%;
-    opacity: 0.9;
+    opacity: 0.0;
     font-family: 'TradeGothic_2', 'sans-serif' !important;
     background-color: white;
     border-radius: 25px;
     font-size: 30px !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    margin-top: -70%;
+/*    margin-left: 15%;*/
 }
 
 .controls {
     margin: auto;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 /*
 .message_text {
     font-size:
 }*/
+
+.v-align-helper {
+
+}
+
+.v-align-target {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.text_align {
+    text-align: center;
+}
