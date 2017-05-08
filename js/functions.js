@@ -6,6 +6,7 @@ var scrollHeight = 0;
 var busy = false;
 var player;
 var view_type;
+var focus_timer;
 
 //check user agent
 if (user_agent.indexOf("windows") > 0) {
@@ -23,7 +24,7 @@ if (user_agent.indexOf("windows") > 0) {
     var key_next = 190;
     var key_pause = 32;
     var key_play = 75;
-} else if (user_agent.indexOf("webos") > 0) {
+} else if (user_agent.indexOf("webos") > 0 || user_agent.indexOf("web0s") > 0) {
     device_type = "WebOS";
     var key_up = 38;
     var key_down = 40;
@@ -75,6 +76,10 @@ if (user_agent.indexOf("windows") > 0) {
     var key_next = 417;
     var key_pause = 19;
     var key_play = 415;
+    if (user_agent.indexOf("bravia 4k 2015") > 0) {
+        device_type = "Sony 4K 2015";
+        var key_pause = 463;
+    }
 } else if (user_agent.indexOf("philips") > 0) {
     device_type = "Philips";
     var key_up = 38;
@@ -105,9 +110,6 @@ if (user_agent.indexOf("windows") > 0) {
 
 //function focus next
 function focusNext() {
-    if (document.activeElement) {
-    document.activeElement.blur();
-    }
     var element = $(".active");
     if (element.next().length && $('#menu_bar').hasClass('active_nav_area')) {
         element.removeClass("active");
@@ -130,9 +132,6 @@ function focusNext() {
 
 //function focus previous
 function focusPrev() {
-     if (document.activeElement) {
-    document.activeElement.blur();
-     }
     var element = $(".active");
     if (element.prev().length && $('#menu_bar').hasClass('active_nav_area')) {
         element.removeClass("active");
@@ -427,17 +426,7 @@ function loadVideo() {
     $('#controls_div').fadeTo(1000,0.9);
     setTimeout(function(){$('#controls_div').fadeOut(1000, function() {$('#page_content').removeClass('text_align');});}, 3500);
     setTimeout(function(){if($('#page_content').hasClass('text_align')) {$('#page_content').removeClass('text_align');}}, 5000);
-
-//    focus_timer = setInterval(function() {document.activeElement.blur(); document.body.focus();}, 1000);
-    document.body.focus();
-
-//    while (current_view == "video") {
-//        console.log("reset focus!");
-//        logger.scrollTop = logger.scrollHeight;
-//          }
-
-//    setInterval(function() {document.body.tabIndex = -1; document.body.focus(); console.log('Reset Focus!');}, 1000);
-//    setInterval(function() {console.log('Reset Focus!');}, 1000);
+    startTimer();
 }
 
 function nextVideo() {
@@ -462,6 +451,24 @@ function playVideo() {
     if (current_view == 'video') {
     player.playVideo();
     }
+}
+
+function startTimer () {
+    clearTimer();
+    focus_timer = setInterval(function() {focusReset()}, 1000);
+}
+
+function clearTimer () {
+    if(focus_timer){
+        clearInterval(focus_timer);
+        focus_timer = null;
+    }
+}
+
+function focusReset() {
+    window.focus();
+    console.log('Focus Reset!');
+    logger.scrollTop = logger.scrollHeight;
 }
 
 //Show About page
@@ -514,6 +521,7 @@ function wrapContent(text) {
     if($('#page_content').hasClass('text_align')) {
         $('#page_content').removeClass('text_align');
     }
+    clearTimer ();
     return text;
 }
 
