@@ -1,4 +1,4 @@
-//variables definition
+//variables declaration
 var current_view;
 var scrollHeight = 0;
 var busy = false;
@@ -23,7 +23,7 @@ function focusNext() {
     duration: 500,
     direction: "vertical",
     complete: function() {
-        element.next(".two-third-block")[0].scrollIntoView(false);
+//        element.next(".two-third-block")[0].scrollIntoView(false);
     }
 });
             }
@@ -48,16 +48,17 @@ function focusPrev() {
                 element.removeClass("active");
                 element.prev(".two-third-block").addClass("active");
 //                element.prev(".two-third-block")[0].scrollIntoView(false);
-                element.next(".two-third-block").scrollintoview({
+                element.prev(".two-third-block").scrollintoview({
     duration: 500,
     direction: "vertical",
     complete: function() {
-        element.next(".two-third-block")[0].scrollIntoView(false);
+//        element.prev(".two-third-block")[0].scrollIntoView(false);
     }
 });
             } else {
             element.removeClass("active");
             $('.menu_icon').addClass("active");
+            $('#main_content').animate({scrollTop: '0px'}, 500);
             }
         }
     } else {
@@ -230,7 +231,6 @@ function getStandings(your_url) {
         text = text.find('#white-background').eq(0).html();
         text = wrapContent(text);
         document.getElementById('page_content').innerHTML = text;
-//        window.stop();
         }
     });
 }
@@ -255,7 +255,6 @@ function getNews(your_url) {
             text = "<div id='white-background'><h2 class='current_header'>Latest News</h2><div class='solid_bar'></div>" + text + "</div>";
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
-//            window.stop();
         }
     });
 }
@@ -279,7 +278,6 @@ function getPros(your_url) {
             text = text.find('#white-background').eq(0).html();
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
-//            window.stop();
         }
     });
 }
@@ -454,26 +452,24 @@ $(document).ready(function(){
     }
 })();
 
-    $('.move').on('click', function() {
-
+//Navigation Items Click listener
+$('.move').on('click', function() {
         $('.active').removeClass('active');
         $(this).addClass('active');
-
         if ($(".focus_highlight")) {
         $(".focus_highlight").removeClass("focus_highlight");
     }
     if ($("#" + current_view)) {
         $("#" + current_view).addClass("focus_highlight");
     }
-
+        if ($(this).hasClass('close_btn')) {
+            closeNav();
+        }
     });
 
-    $("#page_content").click(function( event ) {
-
-  event.preventDefault();
-
-
-});
+//    $("#page_content").click(function( event ) {
+//  event.preventDefault();
+//});
 
 //Set and hide the splash screen
 var x = Math.floor((Math.random() * 3) + 1);
