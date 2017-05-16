@@ -20,7 +20,7 @@ html, body {
 #main_content {
     width: 1280px !important;
     height: 720px !important;
-    overflow: hidden;
+    overflow: auto;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -150,7 +150,7 @@ html, body {
 /* When you mouse over the navigation links, change their color */
 
 .menu_side a:hover {
-    color: #818181;
+    color: #f1f1f1;
 }
 
 
@@ -171,6 +171,8 @@ html, body {
         font-size: 18px;
     }
 }
+
+/*Active focus states*/
 
 .active {
     transition: border-radius 0.5s;
@@ -358,7 +360,7 @@ strong {
 
 .permalink {
     font-size: 34px;
-    margin: 0px;
+    margin: 5px;
     margin-bottom: -25px;
 }
 
