@@ -18,13 +18,9 @@ function focusNext() {
             if (element.next(".two-third-block").length) {
                 element.removeClass("active");
                 element.next(".two-third-block").addClass("active");
-//                element.next(".two-third-block")[0].scrollIntoView(false);
                 element.next(".two-third-block").scrollintoview({
     duration: 500,
     direction: "vertical",
-    complete: function() {
-//        element.next(".two-third-block")[0].scrollIntoView(false);
-    }
 });
             }
         } else {
@@ -47,13 +43,9 @@ function focusPrev() {
             if (element.prev(".two-third-block").length) {
                 element.removeClass("active");
                 element.prev(".two-third-block").addClass("active");
-//                element.prev(".two-third-block")[0].scrollIntoView(false);
                 element.prev(".two-third-block").scrollintoview({
     duration: 500,
     direction: "vertical",
-    complete: function() {
-//        element.prev(".two-third-block")[0].scrollIntoView(false);
-    }
 });
             } else {
             element.removeClass("active");
