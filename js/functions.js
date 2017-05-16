@@ -18,7 +18,14 @@ function focusNext() {
             if (element.next(".two-third-block").length) {
                 element.removeClass("active");
                 element.next(".two-third-block").addClass("active");
-                element.next(".two-third-block")[0].scrollIntoView(false);
+//                element.next(".two-third-block")[0].scrollIntoView(false);
+                element.next(".two-third-block").scrollintoview({
+    duration: 500,
+    direction: "vertical",
+    complete: function() {
+        element.next(".two-third-block")[0].scrollIntoView(false);
+    }
+});
             }
         } else {
             $('.two-third-block:first').addClass("active");
@@ -40,7 +47,14 @@ function focusPrev() {
             if (element.prev(".two-third-block").length) {
                 element.removeClass("active");
                 element.prev(".two-third-block").addClass("active");
-                element.prev(".two-third-block")[0].scrollIntoView(false);
+//                element.prev(".two-third-block")[0].scrollIntoView(false);
+                element.next(".two-third-block").scrollintoview({
+    duration: 500,
+    direction: "vertical",
+    complete: function() {
+        element.next(".two-third-block")[0].scrollIntoView(false);
+    }
+});
             } else {
             element.removeClass("active");
             $('.menu_icon').addClass("active");
@@ -78,11 +92,9 @@ function scrollUp () {
         $({ n: 0 }).animate({ n: 150}, {
     duration: 250,
     step: function(now, fx) {
-//        console.log(now);
         content_page.scrollTop = scrollHeight - now;
     }, complete: function () {
         scrollHeight = scrollHeight - 150;
-//        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
         busy = false;
     }
 });
@@ -96,11 +108,9 @@ function scrollDown () {
          $({ n: 0 }).animate({ n: 150}, {
     duration: 250,
     step: function(now, fx) {
-//        console.log(now);
         content_page.scrollTop = scrollHeight + now;
     }, complete: function () {
         scrollHeight = scrollHeight + 150;
-//        console.log(content_page.scrollTop + " " + scrollHeight + " " + content_page.scrollHeight);
         busy = false;
     }
 });
@@ -141,6 +151,8 @@ function closeNav() {
 
 //Keydown keycode identifier function
 $(document).keydown(function(e){
+//Prevent default key function
+        e.preventDefault();
         if (e.keyCode == key_right) {
             closeNav();
             console.log(e.keyCode + " = key_right");
@@ -154,7 +166,6 @@ $(document).keydown(function(e){
             focusPrev();
             console.log(e.keyCode + " = key_up");
         } else if (e.keyCode == key_enter) {
-            e.preventDefault();
             keyEnter();
             console.log(e.keyCode + " = key_enter");
         } else if (e.keyCode == key_3) {
@@ -319,6 +330,7 @@ function onYouTubeIframeAPIReady() {
 function loadVideo() {
     player.loadPlaylist({listType:"user_uploads",list:"streetleague",});
     $('.menu_icon').fadeTo(1000, 0.5);
+    $('#main_content').css('overflow','hidden');
     $('#page_content').append("<div class='v-align-helper'></div><div class='v-align-target'><div id='controls_div'><p class='message_text'>Use the media keys on your remote to control the player!</p><img class='controls' src='img/controls.png'></div></div>");
     $('#page_content').addClass('text_align');
     $('#controls_div').fadeTo(1000,0.9);
@@ -416,6 +428,7 @@ function wrapContent(text) {
     scrollHeight = 0;
     text = "<div id='content_wrapper'>" + text + "</div>";
     $('.menu_icon').fadeTo(1000, 1);
+    $('#main_content').css('overflow','auto');
     if($('#page_content').hasClass('text_align')) {
         $('#page_content').removeClass('text_align');
     }
@@ -441,24 +454,26 @@ $(document).ready(function(){
     }
 })();
 
-//    $('.move').hover(function() {console.log('Hovered!!');}, function() {console.log('UNHovered!!');});
+    $('.move').on('click', function() {
 
-//    $('.move').on('click', function() {
-//
-//        $(this).animate({borderRadius: "100px"}, 100, function() {$(this).animate({borderRadius: "25px"}, 100)});
-//        $(this).fadeTo( 100 , -100, function() {$(this).fadeTo( 50 , 1)});
-//
-//        $('.active').removeClass('active');
-//        $(this).addClass('active');
-//
-//        if ($(".focus_highlight")) {
-//        $(".focus_highlight").removeClass("focus_highlight");
-//    }
-//    if ($("#" + current_view)) {
-//        $("#" + current_view).addClass("focus_highlight");
-//    }
-//
-//    });
+        $('.active').removeClass('active');
+        $(this).addClass('active');
+
+        if ($(".focus_highlight")) {
+        $(".focus_highlight").removeClass("focus_highlight");
+    }
+    if ($("#" + current_view)) {
+        $("#" + current_view).addClass("focus_highlight");
+    }
+
+    });
+
+    $("#page_content").click(function( event ) {
+
+  event.preventDefault();
+
+
+});
 
 //Set and hide the splash screen
 var x = Math.floor((Math.random() * 3) + 1);
