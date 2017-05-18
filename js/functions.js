@@ -454,14 +454,15 @@ $('.move').on('click', function() {
     if ($("#" + current_view)) {
         $("#" + current_view).addClass("focus_highlight");
     }
-        if ($(this).hasClass('close_btn')) {
+        if ($(this).attr('id') == 'menu_close') {
             closeNav();
         }
     });
 
-//    $("#page_content").click(function( event ) {
-//  event.preventDefault();
-//});
+    $("#page_content").click(function(event) {
+//    Pervent default click function
+    event.preventDefault();
+    });
 
 //Set and hide the splash screen
 var x = Math.floor((Math.random() * 3) + 1);
