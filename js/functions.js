@@ -468,6 +468,9 @@ $(document).ready(function(){
     }
 })();
 
+    var preloadimage = new Image();
+    preloadimage.src = "img/no_network.png";
+
 //Navigation Items Click listener
 $('.move').on('click', function() {
         $('.active').removeClass('active');
