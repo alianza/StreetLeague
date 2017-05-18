@@ -63,7 +63,7 @@ function keyEnter() {
     var element = $(".active");
     element.click();
     element.animate({borderRadius: "100px"}, 100, function() {element.animate({borderRadius: "25px"}, 100)});
-    element.fadeTo( 100 , -100, function() {element.fadeTo( 50 , 1)});
+    element.fadeTo( 100 , -100, function() {element.fadeTo( 50 , 1); element.removeAttr('style');});
     if ($(".focus_highlight")) {
         $(".focus_highlight").removeClass("focus_highlight");
     }
@@ -216,6 +216,10 @@ function getStandings(your_url) {
     $.ajax({
     url: your_url,
     type: 'GET',
+    timeout: 15000,
+    error: function(err) {
+            dataFailed();
+        },
     success: function(res) {
         var text = res.responseText;
         // then you can manipulate your text as you wish
@@ -239,6 +243,10 @@ function getNews(your_url) {
     $.ajax({
         url: your_url,
         type: 'GET',
+        timeout: 15000,
+        error: function(err) {
+            dataFailed();
+        },
         success: function(res) {
             var text = res.responseText;
             // then you can manipulate your text as you wish
@@ -263,6 +271,10 @@ function getPros(your_url) {
     $.ajax({
         url: your_url,
         type: 'GET',
+        timeout: 15000,
+        error: function(err) {
+            dataFailed();
+        },
         success: function(res) {
             var text = res.responseText;
             // then you can manipulate your text as you wish
@@ -319,7 +331,7 @@ function onYouTubeIframeAPIReady() {
 
 function loadVideo() {
     player.loadPlaylist({listType:"user_uploads",list:"streetleague",});
-    $('.menu_icon').fadeTo(1000, 0.5);
+    $('.menu_icon').addClass('faded');
     $('#main_content').css('overflow','hidden');
     $('#page_content').append("<div class='v-align-helper'></div><div class='v-align-target'><div id='controls_div'><p class='message_text'>Use the media keys on your remote to control the player!</p><img class='controls' src='img/controls.png'></div></div>");
     $('#page_content').addClass('text_align');
@@ -401,6 +413,10 @@ function article (title, your_url) {
     $.ajax({
         url: your_url,
         type: 'GET',
+        timeout: 15000,
+        error: function(err) {
+            dataFailed();
+        },
         success: function(res) {
             var text = res.responseText;
             // then you can manipulate your text as you wish
@@ -417,7 +433,7 @@ function article (title, your_url) {
 function wrapContent(text) {
     scrollHeight = 0;
     text = "<div id='content_wrapper'>" + text + "</div>";
-    $('.menu_icon').fadeTo(1000, 1);
+    $('.menu_icon').removeClass('faded');
     $('#main_content').css('overflow','auto');
     if($('#page_content').hasClass('text_align')) {
         $('#page_content').removeClass('text_align');
@@ -426,7 +442,15 @@ function wrapContent(text) {
     return text;
 }
 
+function dataFailed() {
+    document.getElementById('page_content').innerHTML = "<img class='loader' style='width: 150px; margin-top: 250px;' src='img/no_network.png'>";
+}
+
 $(document).ready(function(){
+//increase Tizen screen size
+    if(device_type == "Samsung Tizen") {
+        $("html").css("zoom",1.5)
+    }
 
 //Initiate the logger to catch all console.log() calls
     (function () {
