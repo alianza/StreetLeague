@@ -63,7 +63,7 @@ function keyEnter() {
     var element = $(".active");
     element.click();
     element.animate({borderRadius: "100px"}, 100, function() {element.animate({borderRadius: "25px"}, 100)});
-    element.fadeTo( 100 , -100, function() {element.fadeTo( 50 , 1, function() {element.removeAttr('style');}); });
+    element.fadeTo( 100 , -10, function() {element.fadeTo( 50 , 1, function() {element.removeAttr('style');}); });
     if ($(".focus_highlight")) {
         $(".focus_highlight").removeClass("focus_highlight");
     }
@@ -496,16 +496,7 @@ $('.move').on('click', function() {
 
                    var url = $(event.target).closest('a').attr('href');
                    var title = $(event.target).closest('a').attr('title').toLowerCase().replace('permanent link to ', '')
-
-//                   url = $(event.target).closest('a').attr('href');
-//                   title = $(event.target).closest('a').text();
                    console.log(url + " img " + title);
-
-                   if (url != undefined && title != undefined) {
-
-                       article(title, url);
-
-                   }
 
                } else {
 
@@ -513,15 +504,15 @@ $('.move').on('click', function() {
                     var title = $(event.target).text();
                     console.log(url + " " + title);
 
-            if (url != undefined && title != undefined) {
-
-                    article(title, url);
-
-                }
-
                }
+
+            if (url != undefined && title != undefined) {
+                        $(event.target).animate({borderRadius: "100px"}, 50, function() {$(event.target).fadeTo( 100 , 0)});
+                        $(event.target).fadeTo( 100 , 1, function() {$(event.target).animate({borderRadius: "0px"}, 100, function () {$(event.target).removeAttr('style'); article(title, url);});});
+                   }
         }
     });
+
 //Set and hide the splash screen
 var x = Math.floor((Math.random() * 3) + 1);
 $('#splash_image').attr('src', ".//img/splashes/splash" + x +".png");
