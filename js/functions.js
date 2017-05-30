@@ -513,6 +513,16 @@ $('.move').on('click', function() {
         }
     });
 
+    $('.menu_logo').click(function(event) {
+        if ($(".focus_highlight")) {
+        $(".focus_highlight").removeClass("focus_highlight");
+    }
+        if ($(".active")) {
+        $(".active").removeClass("active");
+    }
+        $('.close_btn').addClass('active');
+    });
+
 //Set and hide the splash screen
 var x = Math.floor((Math.random() * 3) + 1);
 $('#splash_image').attr('src', ".//img/splashes/splash" + x +".png");
