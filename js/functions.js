@@ -486,6 +486,7 @@ $('.move').on('click', function() {
         }
     });
 
+    //non menu bar clicks listener for handling pointer support in news browse page
     $("#page_content").click(function(event) {
 //    Pervent default click function
         event.preventDefault();
@@ -513,6 +514,7 @@ $('.move').on('click', function() {
         }
     });
 
+    //menu logo click listener for double focus handling with pointer support
     $('.menu_logo').click(function(event) {
         if ($(".focus_highlight")) {
         $(".focus_highlight").removeClass("focus_highlight");
