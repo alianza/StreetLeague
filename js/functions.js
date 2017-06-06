@@ -185,6 +185,9 @@ $(document).keydown(function(e){
         } else if (e.keyCode == key_play) {
             playVideo();
             console.log(e.keyCode + " = key_play");
+        } else if (e.keyCode == key_play_pause) {
+            playPauseVideo();
+            console.log(e.keyCode + " = key_play_pause");
         } else {
             console.log("Unknown key: " + e.keyCode);
         }
@@ -363,6 +366,18 @@ function playVideo() {
     if (current_view == 'video') {
     player.playVideo();
     }
+}
+
+function playPauseVideo() {
+    if (current_view == 'video') {
+            if (player.getPlayerState() == 1) {
+                player.pauseVideo();
+                console.log('Player Paused!');
+            } else {
+                player.playVideo();
+                console.log('Player Started!');
+            }
+            }
 }
 
 function startTimer () {

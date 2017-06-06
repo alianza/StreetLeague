@@ -18,6 +18,7 @@ if (user_agent.indexOf("windows") > 0) {
     var key_next = 190;
     var key_pause = 32;
     var key_play = 75;
+    var key_play_pause = 83;
 } else if (user_agent.indexOf("webos") > 0 || user_agent.indexOf("web0s") > 0) {
     device_type = "WebOS";
     var key_up = 38;
@@ -100,4 +101,5 @@ if (user_agent.indexOf("windows") > 0) {
     var key_next = 417;
     var key_pause = 19;
     var key_play = 415;
+    var key_play_pause = 10009;
 }
