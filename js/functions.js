@@ -216,21 +216,13 @@ function getStandings(your_url) {
     view_type = "narrow";
     console.log('current view: ' + current_view);
 //  fetch data
-    $.ajax({
-    url: your_url,
-    type: 'GET',
-    timeout: 15000,
-    error: function(err) {
-            dataFailed();
-        },
-    success: function(res) {
-        var text = res.responseText;
+    var text = getContents(your_url);
+    text.then(function (text) {
         // then you can manipulate your text as you wish
-        text = $(text);//this turns your string into real html
-        text = text.find('#white-background').eq(0).html();
-        text = wrapContent(text);
-        document.getElementById('page_content').innerHTML = text;
-        }
+    text = $(text.contents); //this turns your string into real html
+    text = text.find('#white-background').eq(0).html();
+    text = wrapContent(text);
+    document.getElementById('page_content').innerHTML = text;
     });
 }
 
@@ -243,22 +235,14 @@ function getNews(your_url) {
     view_type = "narrow";
     console.log('current view: ' + current_view);
 //  fetch data
-    $.ajax({
-        url: your_url,
-        type: 'GET',
-        timeout: 15000,
-        error: function(err) {
-            dataFailed();
-        },
-        success: function(res) {
-            var text = res.responseText;
+    var text = getContents(your_url);
+    text.then(function (text) {
             // then you can manipulate your text as you wish
-            text = $(text);//this turns your string into real html
+            text = $(text.contents);//this turns your string into real html
             text = text.find('#home-blog-items').eq(0).html();
             text = "<div id='white-background'><h2 class='current_header'>Latest News</h2><div class='solid_bar'></div>" + text + "</div>";
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
-        }
     });
 }
 
@@ -271,21 +255,13 @@ function getPros(your_url) {
     view_type = "narrow";
     console.log('current view: ' + current_view);
 //  fetch data
-    $.ajax({
-        url: your_url,
-        type: 'GET',
-        timeout: 15000,
-        error: function(err) {
-            dataFailed();
-        },
-        success: function(res) {
-            var text = res.responseText;
+    var text = getContents(your_url);
+    text.then(function (text) {
             // then you can manipulate your text as you wish
-            text = $(text);//this turns your string into real html
+            text = $(text.contents);//this turns your string into real html
             text = text.find('#white-background').eq(0).html();
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
-        }
     });
 }
 
@@ -377,7 +353,7 @@ function playPauseVideo() {
                 player.playVideo();
                 console.log('Player Started!');
             }
-            }
+        }
 }
 
 function startTimer () {
@@ -425,22 +401,26 @@ function article (title, your_url) {
     view_type = "narrow";
     console.log('current view: ' + current_view);
 //  fetch data
-    $.ajax({
-        url: your_url,
-        type: 'GET',
-        timeout: 15000,
-        error: function(err) {
-            dataFailed();
-        },
-        success: function(res) {
-            var text = res.responseText;
+    var text = getContents(your_url);
+    text.then(function (text) {
             // then you can manipulate your text as you wish
-            text = $(text);//this turns your string into real html
+            text = $(text.contents);//this turns your string into real html
             text = text.find('.entry-content').eq(0).html();
             text = '<h2 class="current_header">' + title + '</h2><div class="solid_bar"></div>' + text;
             text = wrapContent(text);
             document.getElementById('page_content').innerHTML = text;
             $('.alignnone:first').hide();
+    });
+}
+
+function getContents(your_url) {
+
+    return $.ajax({
+    url: "https://allorigins.us/get?url=" + your_url + "&callback=?",
+    type: 'GET',
+    timeout: 15000,
+    error: function(err) {
+            dataFailed();
         }
     });
 }
