@@ -403,7 +403,7 @@ function article (title, your_url) {
 //  fetch data
     var text = getContents(your_url);
     text.then(function (text) {
-            // then you can manipulate your text as you wish
+// then you can manipulate your text as you wish
             text = $(text.contents);//this turns your string into real html
             text = text.find('.entry-content').eq(0).html();
             text = '<h2 class="current_header">' + title + '</h2><div class="solid_bar"></div>' + text;
@@ -530,7 +530,13 @@ homepage();
 
 //Log some userful device info
 console.log(user_agent);
-console.log(device_type);
+
+    if (device_type != undefined) {
+        console.log(device_type);
+    } else {
+        console.log("Device type = " + device_type);
+        $( "#log_div" ).toggle();
+    }
 
 //Identify some elements for scrolling purposes
 content_page = document.getElementById('main_content');
