@@ -18,10 +18,7 @@ function focusNext() {
             if (element.next(".two-third-block").length) {
                 element.removeClass("active");
                 element.next(".two-third-block").addClass("active");
-                element.next(".two-third-block").scrollintoview({
-    duration: 500,
-    direction: "vertical",
-});
+                element.next(".two-third-block").scrollintoview({duration: 500, direction: "vertical",});
             }
         } else {
             $('.two-third-block:first').addClass("active");
@@ -43,10 +40,7 @@ function focusPrev() {
             if (element.prev(".two-third-block").length) {
                 element.removeClass("active");
                 element.prev(".two-third-block").addClass("active");
-                element.prev(".two-third-block").scrollintoview({
-    duration: 500,
-    direction: "vertical",
-});
+                element.prev(".two-third-block").scrollintoview({duration: 500, direction: "vertical",});
             } else {
             element.removeClass("active");
             $('.menu_icon').addClass("active");
@@ -276,7 +270,7 @@ function showVideo() {
     view_type = "wide";
     console.log('current view: ' + current_view);
     //Load youtube Iframe API if it has not been yet
-    if ($("#youtube_API").length == 0) {
+    if ($("#youtube_API").length === 0) {
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         tag.id = "youtube_API";
@@ -358,7 +352,7 @@ function playPauseVideo() {
 
 function startTimer () {
     clearTimer();
-    focus_timer = setInterval(function() {focusReset()}, 1000);
+    focus_timer = setInterval(function() {focusReset();}, 1000);
 }
 
 function clearTimer () {
@@ -444,7 +438,7 @@ function dataFailed() {
 $(document).ready(function(){
 //increase Tizen screen size
     if(device_type == "Samsung Tizen") {
-        $("html").css("zoom",1.5)
+        $("html").css("zoom",1.5);
     }
 
 //Initiate the logger to catch all console.log() calls
@@ -491,7 +485,7 @@ $('.move').on('click', function() {
              if ($(event.target).prop("tagName") == "IMG") {
 
                    var url = $(event.target).closest('a').attr('href');
-                   var title = $(event.target).closest('a').attr('title').toLowerCase().replace('permanent link to ', '')
+                   var title = $(event.target).closest('a').attr('title').toLowerCase().replace('permanent link to ', '');
                    console.log(url + " img " + title);
 
                } else {
@@ -502,7 +496,7 @@ $('.move').on('click', function() {
 
                }
 
-            if (url != undefined && title != undefined) {
+            if (url !== undefined && title !== undefined) {
                         $(event.target).animate({borderRadius: "100px"}, 50, function() {$(event.target).fadeTo( 100 , 0)});
                         $(event.target).fadeTo( 100 , 1, function() {$(event.target).animate({borderRadius: "0px"}, 100, function () {$(event.target).removeAttr('style'); article(title, url);});});
                    }
@@ -531,7 +525,7 @@ homepage();
 //Log some userful device info
 console.log(user_agent);
 
-    if (device_type != undefined) {
+    if (device_type !== undefined) {
         console.log(device_type);
     } else {
         console.log("Device type = " + device_type);
