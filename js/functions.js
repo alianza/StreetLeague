@@ -407,10 +407,10 @@ function article (title, your_url) {
     });
 }
 
-function getContents(your_url) {
+function getContents(url) {
 
     return $.ajax({
-    url: "https://allorigins.us/get?url=" + your_url + "&callback=?",
+    url: "https://allorigins.us/get?url=" + url + "&callback=?",
     type: 'GET',
     timeout: 15000,
     error: function(err) {

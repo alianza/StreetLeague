@@ -215,6 +215,7 @@ html, body {
 .current_standings .score_heading {
     text-align: right;
     padding-right: 70px;
+    width: 20%;
 }
 
 .heading >:first-child {
