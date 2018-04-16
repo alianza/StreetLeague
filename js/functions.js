@@ -410,13 +410,15 @@ function article (title, your_url) {
 function getContents(url) {
 
     return $.ajax({
-    url: "https://allorigins.us/get?url=" + url + "&callback=?",
+    dataType: "json",
+    url: "http://allorigins.me/get?url=" + url + "&callback=?",
     type: 'GET',
     timeout: 15000,
     error: function(err) {
             dataFailed();
         }
     });
+    
 }
 
 function wrapContent(text) {
